@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — Care IGD Clinical Suite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+            inter: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            med: {
+              DEFAULT: '#006a4e',
+              dark: '#00563f',
+              light: '#e6f4f0',
+              emerald: '#047857',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body data-page="login">
+  <!-- Root Container: Halaman Login Care IGD -->
+  <div id="appRoot">
+    <div class="min-h-screen flex items-center justify-center p-4">
+      <div class="bg-white rounded-[24px] shadow-[0_20px_50px_rgba(15,23,42,0.08)] border border-slate-100 w-full max-w-[420px] p-9">
+        <div class="flex flex-col items-center mb-7">
+          <div class="w-14 h-14 rounded-2xl bg-[#006a4e] flex items-center justify-center shadow-md shadow-emerald-900/20 mb-3">
+            <div class="w-7 h-7 rounded-md bg-white flex items-center justify-center text-[#006a4e] font-extrabold text-xl leading-none">+</div>
+          </div>
+          <h1 class="text-[22px] font-extrabold tracking-tight text-slate-900">
+            <span class="text-[#006a4e]">Care</span> IGD
+          </h1>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1.5">ID Petugas / NIP</label>
+            <input type="text" value="19890412" placeholder="Masukkan NIP Petugas" class="w-full px-4 py-3 rounded-xl bg-[#eef2fb] border border-transparent focus:border-[#006a4e] focus:bg-white text-sm font-semibold text-slate-800 outline-none transition" />
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <label class="text-xs font-bold text-slate-700">PIN / Sandi Klinis</label>
+              <button type="button" class="text-[11px] font-semibold text-slate-400 hover:text-slate-600">Tampilkan</button>
+            </div>
+            <input type="text" value="948201" placeholder="******" class="w-full px-4 py-3 rounded-xl bg-[#eef2fb] border border-transparent focus:border-[#006a4e] focus:bg-white text-sm font-semibold text-slate-800 tracking-[0.16em] outline-none transition" />
+          </div>
+
+          <div class="pt-1">
+            <label class="block text-xs font-bold text-slate-700 mb-2">Pilih Peran / Role Akses</label>
+            <div class="grid grid-cols-2 gap-2.5">
+              <button type="button" onclick="selectLoginRole('administrasi')" class="py-2.5 px-3 rounded-xl text-xs font-bold bg-[#f1f5fd] text-slate-600 border border-slate-200/80">Administrasi</button>
+              <button type="button" onclick="selectLoginRole('perawat')" class="py-2.5 px-3 rounded-xl text-xs font-bold bg-[#f1f5fd] text-slate-600 border border-slate-200/80">Perawat</button>
+              <button type="button" onclick="selectLoginRole('dokter')" class="py-2.5 px-3 rounded-xl text-xs font-bold bg-[#006a4e] text-white border border-[#006a4e]">Dokter</button>
+              <button type="button" onclick="selectLoginRole('lab')" class="py-2.5 px-3 rounded-xl text-xs font-bold bg-[#f1f5fd] text-slate-600 border border-slate-200/80">Petugas Lab</button>
+            </div>
+          </div>
+
+          <div class="pt-3">
+            <button type="button" onclick="doLogin()" class="w-full py-3.5 rounded-xl bg-[#006a4e] hover:bg-[#00563f] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md shadow-emerald-900/15 transition">
+              <span>Masuk ke Sistem IGD →</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Root -->
+  <div id="modalRoot"></div>
+  <!-- Toast Notification -->
+  <div id="toastRoot" class="fixed bottom-5 right-5 z-50 pointer-events-none flex flex-col gap-2"></div>
+
+  <!-- File JavaScript Eksternal -->
+  <script src="./js/icons.js"></script>
+  <script src="./js/state.js"></script>
+  <script src="./js/pages.js"></script>
+  <script src="./js/modals.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
