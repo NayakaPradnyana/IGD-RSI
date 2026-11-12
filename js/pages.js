@@ -214,6 +214,10 @@ function renderTopbar(options = {}) {
 // 2 & 3. SCREEN: DASHBOARD & PASIEN IGD (Terupdate otomatis di semua Role)
 // =========================================================================
 function openNewRegBiasa() {
+  if (S.role !== 'administrasi') {
+    showToast('Akses Ditolak: Hanya Petugas Administrasi yang dapat mengakses Registrasi Biasa.', 'danger');
+    return;
+  }
   const nextId = `IGD-2410-${String(S.nextRegNumber).padStart(3, '0')}`;
   S.regBiasaStep = 'empty';
   S.regBiasaFoundInDb = false;
@@ -234,6 +238,10 @@ function openNewRegBiasa() {
 }
 
 function openNewRegDarurat() {
+  if (S.role !== 'perawat') {
+    showToast('Akses Ditolak: Hanya Perawat Triage yang dapat mengakses Registrasi Darurat.', 'danger');
+    return;
+  }
   S.regDaruratStep = 'empty';
   S.regDaruratForm = {
     idPasien: 'EMG-2410-001',
@@ -404,16 +412,20 @@ function renderDashboardOrPasienList(isPasienIgdPage = false) {
           <p class="text-xs font-medium text-slate-400">Status triase dan alokasi bed saat ini</p>
         </div>
         <div class="flex items-center gap-2.5">
-          <button onclick="openNewRegBiasa()"
-            class="px-3.5 py-2 rounded-xl bg-white hover:bg-emerald-50 border border-emerald-700/30 text-[#047857] text-xs font-semibold inline-flex items-center gap-1.5 transition">
-            ${ICONS.userAdd}
-            <span>Registrasi Biasa</span>
-          </button>
-          <button onclick="openNewRegDarurat()"
-            class="px-3.5 py-2 rounded-xl bg-[#e11d48] hover:bg-rose-700 text-white text-xs font-semibold inline-flex items-center gap-1.5 shadow-sm transition">
-            ${ICONS.bolt}
-            <span>Registrasi Darurat</span>
-          </button>
+          ${S.role === 'administrasi' ? `
+            <button onclick="openNewRegBiasa()"
+              class="px-3.5 py-2 rounded-xl bg-white hover:bg-emerald-50 border border-emerald-700/30 text-[#047857] text-xs font-semibold inline-flex items-center gap-1.5 transition">
+              ${ICONS.userAdd}
+              <span>Registrasi Biasa</span>
+            </button>
+          ` : ''}
+          ${S.role === 'perawat' ? `
+            <button onclick="openNewRegDarurat()"
+              class="px-3.5 py-2 rounded-xl bg-[#e11d48] hover:bg-rose-700 text-white text-xs font-semibold inline-flex items-center gap-1.5 shadow-sm transition">
+              ${ICONS.bolt}
+              <span>Registrasi Darurat</span>
+            </button>
+          ` : ''}
         </div>
       </div>
 

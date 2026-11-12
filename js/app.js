@@ -89,8 +89,14 @@ function prepareAdminFormForPatient(p) {
 }
 
 function isPageAllowedForRole(page, role) {
-  if (page === 'login' || page === 'dashboard' || page === 'pasien-igd' || page === 'detail' || page === 'reg-biasa' || page === 'reg-darurat') {
+  if (page === 'login' || page === 'dashboard' || page === 'pasien-igd' || page === 'detail') {
     return true;
+  }
+  if (page === 'reg-biasa' && role !== 'administrasi') {
+    return false;
+  }
+  if (page === 'reg-darurat' && role !== 'perawat') {
+    return false;
   }
   if ((page === 'penanganan' || page === 'pemesanan') && role !== 'dokter') {
     return false;
